@@ -40,7 +40,6 @@ class BreedImg extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const {breeds, breedSelected, isLoading} = this.state;
     
     console.log(breeds)
@@ -48,7 +47,7 @@ class BreedImg extends React.Component {
     return (
       <>
         { !isLoading &&
-          <div className="container">
+          <div className="center">
             <label className="blue-text">Select a breed:</label><br /><br />
             <select 
               value={breedSelected} 
