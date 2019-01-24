@@ -7,7 +7,7 @@ class RandomImg extends React.Component {
   constructor () {
     super ();
     this.state = {
-      imageUrl: null
+      imageUrl: ''
     }
   }
 
@@ -18,7 +18,7 @@ class RandomImg extends React.Component {
         this.setState({
           imageUrl: imageUrl
         })
-      }).catch(err => console.log('error'))
+      }).catch(err => console.log(err))
   }
 
   render () {

@@ -7,66 +7,64 @@ class BreedImg extends React.Component {
     super();
     this.state = {
       breeds: [],
-      imageUrl: null,
-      breedSelected: null
+      imageUrl: '',
+      breedSelected: [],
+      isLoading: true
     }
   }
 
   componentDidMount = () => {
     axios.get('https://dog.ceo/api/breeds/list/all')
     .then(res => {
-      let breeds = Object.keys(res.data.message);
+      let breeds = Object.keys(res.data.message).slice(0,20);
       this.setState({
-        breeds: breeds
+        breeds: breeds,
+        isLoading: false
       })
-    }).catch(err => console.log('error'))
+    }).catch(err => console.log(err))
   }
 
-  handleChange = breed => {
-    axios(`https://dog.ceo/api/breed/${breed}/images/random`)
-      .then(res => {
-        console.log(res.data)
-        // this.setState({
-    
-        // })
-      })
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = () => {
+    axios.get(`https://dog.ceo/api/breed/${this.state.breedSelected}/images/random`)
+    .then(res => {
+      this.setState({
+        imageUrl: res.data.message
+      })
+    }).catch(err => console.log(err))
   }
 
   render() {
-    const {breeds} = this.state;
-    const breedList = breeds.map(breed => {
-      return (
-        <option value={breed} key={breed}>{breed}</option>
-      ) 
-    })
-
+    console.log(this.state)
+    const {breeds, breedSelected, isLoading} = this.state;
+    
+    console.log(breeds)
+    
     return (
       <>
-        <select>
-          {breedList}
-        </select>
-        <Image imageUrl={this.state.imageUrl}/>
+        { !isLoading &&
+          <div className="container center">
+            <label className="blue-text">Select a breed:</label><br /><br />
+            <select 
+              value={breedSelected} 
+              name ='breedSelected' 
+              onChange={this.handleChange}
+            >
+              {breeds.map(breed => <option key={breed} value={breed}>{breed}</option>)}
+            </select>
+            
+            <button onClick={this.handleSubmit}>Submit</button>
+            <br /> <hr />
+            <Image imageUrl={this.state.imageUrl}/>
+          </div>
+        }
       </>
     )
-
-    // return (
-    //   <div className="container center">
-    //     <form className="center" onSubmit={this.handleSubmit}>
-    //       <label className="blue-text">
-    //         Pick a breed to show a random picture:
-    //         <select className="center" onChange={this.handleChange}>
-    //           {breedList}
-    //         </select>
-    //       </label>
-    //       <button type='submit'>Submit</button>
-    //     </form><br /> <hr />
-    //     <Image imageUrl={this.state.imageUrl}/>
-    //   </div>
-    // )
   }
 }
 
