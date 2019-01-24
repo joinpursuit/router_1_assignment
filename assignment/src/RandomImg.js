@@ -9,18 +9,14 @@ class RandomImg extends Component {
       doge: "",
       doges: []
     };
-    this.clickButton = this.clickButton.bind(this);
+    this.newDoge = this.newDoge.bind(this);
+    this.newDoges = this.newDoges.bind(this);
   }
 
   // this.props.match.params
   // ^ this is the key to differentiating between http://localhost:3000/random and http://localhost:3000/random/:id!!!
 
   componentDidMount() {
-    // if ("num" in this.props.match.params) {
-    //   this.newDoges();
-    // } else {
-    //   this.newDoge();
-    // }
     "num" in this.props.match.params ? this.newDoges() : this.newDoge();
   }
 
@@ -31,33 +27,39 @@ class RandomImg extends Component {
         this.setState({
           doge: res.data.message
         });
+        console.log(this.state.doge);
       })
       .catch(err => {
-        console.log("Error");
+        console.log("Error", err);
       });
   }
 
   newDoges() {
-    console.log("Success");
-    console.log(Object.values(this.props.match.params).toString());
     axios
       .get(
-        `https://dog.ceo/api/breeds/image/random/${Object.values(
-          this.props.match.params
-        ).toString()}`
+        `https://dog.ceo/api/breeds/image/random/${+this.props.match.params
+          .num}`
       )
       .then(res => {
         this.setState({ doges: res.data.message });
         console.log(this.state.doges);
       })
       .catch(err => {
-        console.log("Error");
+        console.log("Error", err);
       });
   }
 
-  clickButton() {
-    this.newDoge();
-  }
+  // handleChange() {
+  //   this.newDoges();
+  //   const doges = this.state.doges.map(doges => {
+  //     return <Image url={doges} />;
+  //   });
+  //   this.returnDoges();
+  // }
+
+  // returnDoges() {
+  //   return <>{doges}</>;
+  // }
 
   determineRenderComponents() {
     const doges = this.state.doges.map(doges => {
@@ -68,9 +70,17 @@ class RandomImg extends Component {
     } else {
       return (
         <>
-          <button type="button" onClick={this.clickButton}>
+          <button type="button" onClick={this.newDoge}>
             New Doge
           </button>
+          <select onChange={this.handleChange}>
+            <option value=""># of dogs</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
           <Image url={this.state.doge} />
         </>
       );

@@ -23,18 +23,6 @@ class App extends Component {
           <Route exact path="/random" component={RandomImg} />
           <Route path="/random/:num" component={RandomImg} />
           <Route exact path="/randomBreed" component={BreedImg} />
-          {/* <Route
-            exact
-            path="/pokemon"
-            render={props => (
-              <Pokemon
-                {...props}
-                showing={this.state.showing}
-                toggleShowing={this.toggleShowing}
-                pokemon={this.state.pokemon}
-              />
-            )}
-          /> */}
         </Switch>
       </div>
     );

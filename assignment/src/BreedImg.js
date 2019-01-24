@@ -24,7 +24,7 @@ class BreedImg extends Component {
         });
       })
       .catch(err => {
-        console.log("Error");
+        console.log("Error", err);
       });
   }
 
@@ -43,7 +43,7 @@ class BreedImg extends Component {
         this.setState({ dogeBreedUrl: res.data.message });
       })
       .catch(err => {
-        console.log("Error");
+        console.log("Error", err);
       });
   }
 
@@ -51,7 +51,10 @@ class BreedImg extends Component {
     const dogeBreeds = this.state.breeds.map(breed => {
       return <option value={breed}>{breed}</option>;
     });
-
+    let dogeUrlExists;
+    if (this.state.dogeBreedUrl) {
+      dogeUrlExists = <Image url={this.state.dogeBreedUrl} />;
+    }
     return (
       <>
         <select onChange={this.handleChange}>
@@ -61,7 +64,7 @@ class BreedImg extends Component {
         <button type="button" onClick={this.handleClick}>
           New Doge
         </button>
-        <Image url={this.state.dogeBreedUrl} />
+        {dogeUrlExists}
       </>
     );
   }
