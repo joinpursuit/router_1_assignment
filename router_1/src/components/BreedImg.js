@@ -48,7 +48,7 @@ class BreedImg extends React.Component {
     return (
       <>
         { !isLoading &&
-          <div className="container center">
+          <div className="container">
             <label className="blue-text">Select a breed:</label><br /><br />
             <select 
               value={breedSelected} 

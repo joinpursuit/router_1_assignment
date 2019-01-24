@@ -7,28 +7,53 @@ class RandomImg extends React.Component {
   constructor () {
     super ();
     this.state = {
-      imageUrl: ''
+      images: '',
+      num: null
     }
   }
 
-  handleRandomOne = () => {
-    axios.get('https://dog.ceo/api/breeds/image/random')
-      .then(res => {
-        let imageUrl = res.data.message;
+  componentDidMount = () => {
+    let num = this.props.match.params.num;
+    if (num) {
+      axios.get(`https://dog.ceo/api/breeds/image/random/${num}`)
+      .then(res =>{
         this.setState({
-          imageUrl: imageUrl
+          images: res.data.message,
+          num: num
+        })
+      })
+    }
+  }
+
+  handleRandom = () => {
+    if (!this.state.num) {
+      axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(res => {
+        this.setState({
+          images: res.data.message
         })
       }).catch(err => console.log(err))
+    }
   }
 
   render () {
-    console.log(this.state)
-    return (
-      <div className="center">
-        <button onClick={this.handleRandomOne}>Click for a random dog image</button><br /><hr />
-        <Image imageUrl={this.state.imageUrl}/>
-      </div>
-    )
+    if ( !this.state.num ) {
+      return (
+  
+        <div className="center">
+          <button onClick={this.handleRandom}
+          >Get a random dog image
+          </button><br /><hr />
+          <Image images={this.state.images} num={this.state.num}/>
+        </div>
+      )
+    } else {
+      return (
+        <div className="center">
+          <Image images={this.state.images} num={this.state.num}/>
+        </div>
+      )
+    }
   }
 }
 

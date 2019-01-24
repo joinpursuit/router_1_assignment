@@ -37,7 +37,7 @@ class App extends Component {
         <div className="App">
           <Navbar /><br />
           <div>
-            <Route path='/random' component={RandomImg} />
+            <Route exact path='/random' component={RandomImg} />
             <Route exact path='/random/:num' component={RandomImg} />
             <Route path='/randomBreed' component={BreedImg} />
           </div>
