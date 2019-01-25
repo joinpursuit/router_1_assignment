@@ -1,9 +1,11 @@
 import React, {Component} from "react"
-import { Route , Switch } from 'react-router-dom'
+import {Route, Switch } from 'react-router-dom'
 import axios from 'axios';
 import {ListDogs} from './ListDogs'
-import { withRouter } from 'react-router'
-import { Test } from './test'
+// import { withRouter } from 'react-router'
+// import {RandomRender} from './RandomRender'
+import RandomNum from './RandomNum'
+
 
 
 class Random extends Component {
@@ -26,16 +28,17 @@ class Random extends Component {
     })
   }
   //
-  componentDidMount(){
-    this.getRandom()
+  componentDidMount(props){
+    // this.getRandom()
+
   }
-  //
+
   getRandom =()=> {
 
     axios
-    .get("https://cors-anywhere.herokuapp.com/https://dog.ceo/api/breeds/image/random/1")
+    .get(`https://cors-anywhere.herokuapp.com/https://dog.ceo/api/breeds/image/random/${this.state.dogNum}`)
     .then(res => {
-      console.log(this.props)
+      console.log('asf')
       this.setState({
         randomDog:res.data.message,
         loading:false
@@ -46,17 +49,11 @@ class Random extends Component {
     })
   }
 
-  renderRandom=(props) => {
-    const { num } = this.props.match.params;
-    return <Test apiCall={this.testAPIcall(num)} />
-  }
-
-  testAPIcall=(aNum)=> {
-
+  testAPIcall=()=> {
+    console.log("PROPS", this.props)
     axios
-    .get(`https://cors-anywhere.herokuapp.com/https://dog.ceo/api/breeds/image/random/${aNum}`)
+    .get(`https://cors-anywhere.herokuapp.com/https://dog.ceo/api/breeds/image/random/${this.props.match.params.num}`)
     .then(res => {
-      console.log(this.props)
       this.setState({
         randomDog:res.data.message,
         loading:false
@@ -66,38 +63,24 @@ class Random extends Component {
       console.log(err)
     })
 
-    return this.state.randomDog
-
   }
-  leTest = (props) =>{
-     return (<>
-              <p> {props.match.params.num}</p>
-            </>
-            );
 
-  }
+
+// this and (props) => this.leTest(props) work to get props to show
+  // leTest = (props) =>{
+  //    return (<>
+  //             <p> {props.match.params.num}</p>
+  //           </>
+  //           );
+  //
+  // }
 // (props) => this.leTest(props)
   render(){
 
-
-
-    if(this.state.loading){
-      return (<>
-              <h1>Barkin' on it-- i mean, Workin' on it!</h1>
-              <img id="doggo" src="https://media1.tenor.com/images/75b8fbd969a79a7487560283204ac8f5/tenor.gif?itemid=4964492" alt="loading doggo"/>
-
-              </> )
-    }
-
     return(
       <div>
-      <Switch>
-          <Route exact path ='/random'/>
-          <Route path='/random/:num' render={(props) => this.leTest(props)} />
 
-      </Switch>
-      <br/>
-      <label>Select Number of Dog to Fetch!</label>
+
       <br/>
       <button onClick={this.getRandom}>Fetch!</button>
       <br/>
@@ -108,4 +91,4 @@ class Random extends Component {
     )
   }
 }
-export default withRouter(Random);
+export default Random;
