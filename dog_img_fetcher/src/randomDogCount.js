@@ -6,23 +6,23 @@ class RandomDogCount extends Component {
   constructor(props){
     super(props)
     this.state = {
-      randomDogNum:null,
+      randomDogNum:props.match.params.count,
       dogImages: []
 
     }
-    this.gettingRandomNumber = this.gettingRandomNumber.bind(this)
+    // this.gettingRandomNumber = this.gettingRandomNumber.bind(this)
     this.apiCall = this.apiCall.bind(this)
     this.toggle = this.toggle.bind(this)
     this.displayImages = this.displayImages.bind(this)
   }
 
-  gettingRandomNumber(){
-    let {count} = this.props.match.params
-    this.setState({
-      randomDogNum: count
-    })
-    console.log(count)
-  }
+  // gettingRandomNumber(){
+  //   let {count} = this.props.match.params
+  //   this.setState({
+  //     randomDogNum: count
+  //   })
+  //   console.log(count)
+  // }
 
 apiCall(){
   let data;
@@ -56,7 +56,7 @@ toggle(){
 }
 
   componentDidMount(){
-    this.gettingRandomNumber()
+    // this.gettingRandomNumber()
     this.apiCall()
       // this.apiCall()
     // debugger;
@@ -68,6 +68,7 @@ toggle(){
 
 
   render() {
+    console.log(this.props, "the props for friday")
 
     return (
       <>

@@ -25,6 +25,7 @@ const NavBar = (props) => {
     <nav>
   <Link to={"/randomImg"}>randomImage </Link>
   <Link to={"/breedImg"}> breed</Link>
+    <Link to={"/favorites"}> favorites</Link>
 
   </nav>
   </>

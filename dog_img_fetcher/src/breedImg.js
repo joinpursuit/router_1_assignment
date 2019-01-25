@@ -46,6 +46,7 @@ class BreedImg extends Component {
         })
 
       });
+
   }
 
   componentDidMount() {
@@ -72,7 +73,7 @@ class BreedImg extends Component {
   //
   // }
   render() {
-    console.log(this.state);
+    console.log(this.state.userInput,"this");
     // console.log(this.state.userInput, "the selection")
     // // console.log(this.state.breeds, "this");
     // console.log(this.state.userInput, "this")
