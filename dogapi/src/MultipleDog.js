@@ -9,8 +9,8 @@ class MultiDog extends React.Component {
     }
   }
 
-  getMultipleDog = (img) => {
-    axios.get(`https://dog.ceo/api/breeds/image/random/${img}`)
+  getMultipleDog = (amount) => {
+    axios.get(`https://dog.ceo/api/breeds/image/random/${amount}`)
     .then(res => {
       this.setState({
         multidog: res.data.message
