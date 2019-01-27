@@ -23,7 +23,6 @@ class RandomImg extends Component {
 
   getMultipleDogImgs = () => {
     let num = this.props.match.params.num
-    console.log("NUM",num)
     axios.get(`https://dog.ceo/api/breeds/image/random/${num}`)
         .then(res => {
           this.setState({
@@ -45,17 +44,19 @@ class RandomImg extends Component {
 
   render() {
     let { imgUrl, imgUrlArr } = this.state;
-    console.log("PROPS",this.props.match.params.num)
-    console.log("ARRAY",imgUrlArr)
+    let { addFavImage } = this.props;
+
     return (
       <div>
-        <h2>Get Random Dogchik</h2>
+        <h2>RETRO DOGS</h2>
         <button onClick={this.handleClick}>Click for anotha</button>
         <br />
-        {imgUrl && !this.props.match.params.num ? <Image url={imgUrl}/> : null}
-        {imgUrlArr ? imgUrlArr.map( imgUrl => {
-          return <Image url={imgUrl}/>
-        }) : null }
+        <div className="images">
+          {imgUrl && !this.props.match.params.num ? <div><Image url={imgUrl} addFavImage={addFavImage}/></div> : null}
+          {imgUrlArr ? imgUrlArr.map( imgUrl => {
+            return <div><Image url={imgUrl} addFavImage={addFavImage}/></div>
+          }) : null }
+        </div>
       </div>
     )
   }

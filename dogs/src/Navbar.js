@@ -13,7 +13,7 @@ class Navbar extends Component {
         {"  "}
         <Link to="/randomBreed">randomBreed</Link>
         {"  "}
-        <Link to="/random/:num">randomNum</Link>
+        <Link to="/favorites">favorites</Link>
       </nav>
     )
   }

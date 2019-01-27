@@ -7,7 +7,7 @@ class BreedImg extends Component {
     super()
     this.state = {
       imgUrl: "",
-      chosenBreed: "123",
+      chosenBreed: "",
       breedList: []
     }
     this.handleChange = this.handleChange.bind(this)
@@ -30,7 +30,6 @@ class BreedImg extends Component {
           this.setState({
             imgUrl: res.data.message
           })
-          console.log(this.state.imgUrl)
         })
   }
 
@@ -54,15 +53,20 @@ class BreedImg extends Component {
 
   render() {
     let { imgUrl, breedList } = this.state;
+    let { addFavImage } = this.props;
+
     return (
       <div>
-        <h2>Get Dogchik Per Breed</h2>
+        <h2>RETRO BREEDS</h2>
+        <p>
         <select name="chosenBreed" onChange={this.handleChange}>
           <option disabled selected>--Choose a breed--</option>
           {this.populateBreeds()}
         </select>
-        <br />
-        {imgUrl ? <Image url={imgUrl}/> : null}
+        </p>
+        <div className="images">
+        {imgUrl ? <div><Image url={imgUrl} addFavImage={addFavImage}/></div> : null}
+        </div>
       </div>
     )
   }
