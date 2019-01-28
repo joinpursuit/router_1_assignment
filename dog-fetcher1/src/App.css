@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+img {
+  width: 500px;
+  margin: 10px 0;
+}
+
+.imageCount {
+display: block;
+text-align: center;
+}
+
+nav a {
+  padding-left: 20px;
+}
+
+select {
+  width: 200px;
+  margin: 10px 0 0 20px;
+}
