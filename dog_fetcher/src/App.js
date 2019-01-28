@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom'
+import NavBar from './NavBar.js'
+import RandomDog from './RandomDog'
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      
+    }
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <NavBar />
+        <Switch>
+          <Route
+          exact path='/'
+          render={() =>
+            {return <h1>Home</h1>}} //{no component required, can just return jsx}
+          />
+          <Route
+          path='/random'
+          component={RandomDog}
+
+          />
+          <Route
+          path='/by_breed'
+          render={() =>
+            {return <h1>By Breed!</h1>}}
+          />
+        </Switch>
       </div>
     );
   }
