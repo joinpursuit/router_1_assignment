@@ -1,4 +1,26 @@
-.App {
+.link {
+  display: inline-flex;
+  align-content: space-between;
+  margin: 10px;
+}
+
+.img {
+  max-height: 400px;
+}
+
+#buttonAndImageTagsDiv button {
+  height: 25px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#buttonAndImageTagsDiv {
+  display: inline-flex;
+  align-content: space-between;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -29,4 +51,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
