@@ -6,17 +6,17 @@ const FavImages = (props) => {
   let displayFavImages = props.favImages.map((img, i) => {
 
     return(
-      <div>
-      hello world
-      <p></p>
-      <img key={i} src={img} alt=" "/>
+      <div className="container">
+      <img className="favImgThumbnail" key={i} src={img} alt=" "/>
       </div>
     )
   })
 return(
-  <>
+  <div>
+  <section className="photos" >
   {displayFavImages}
-  </>
+</section>
+</div>
 )
 }
 
